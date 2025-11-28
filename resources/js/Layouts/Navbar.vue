@@ -55,13 +55,16 @@ const changeLocale = (item) => {
     <header class="h-16 bg-gray-800 -z-0">
         <div class="flex flex-wrap pt-2 items-center justify-between px-4 mx-auto max-w-screen-2xl md:px-10">
             <!-- logo - start -->
-            <a href="/" class="inline-flex  items-center gap-2.5 text-xl text-white md:text-3xl mt-2" aria-label="logo">
-                <div class="-mt-4 relative">
-                    <img src="/RanyLogo.svg" class="w-24" alt="Rany Logo" />
+            <a href="/" class="inline-flex items-center gap-2.5 text-xl text-white md:text-3xl mt-2" aria-label="logo">
+                <div class="flex items-center justify-center w-12 h-12 bg-yellow-500 rounded-lg shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-8 h-8 text-white">
+                        <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
+                        <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
+                        <circle cx="40" cy="50" r="3" fill="white"/>
+                        <circle cx="60" cy="50" r="3" fill="white"/>
+                    </svg>
                 </div>
-
-                <span class="hidden sm:block md:block font-khmer -mt-2">{{ $t("Rany Shop") }}</span>
-
+                <span class="hidden sm:block md:block font-khmer -mt-2 font-bold">{{ $t("Rany Shop") }}</span>
             </a>
 
             <div class="w-80 ml-4 absolute mt-32 md:mt-0 md:relative  md:w-4/12 ">

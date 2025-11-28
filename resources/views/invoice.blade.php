@@ -8,7 +8,14 @@
         <!-- Header Logo and Rany-E_Commerce -->
         <div class="flex justify-center">
             <div>
-                <img src="/RanyLOGOS.png" class="w-28 ml-5 -mb-4" alt=""/>
+                <div class="flex items-center justify-center w-28 h-28 ml-5 -mb-4 bg-yellow-500 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-20 h-20 text-white">
+                        <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
+                        <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
+                        <circle cx="40" cy="50" r="3" fill="white"/>
+                        <circle cx="60" cy="50" r="3" fill="white"/>
+                    </svg>
+                </div>
                 <span class="text-center font-semibold text-gray-900 dark:text-white">
                     <span class="text-yellow-600">{{ __('Rany') }}-</span>{{ __('E-Commerce') }}
                 </span>

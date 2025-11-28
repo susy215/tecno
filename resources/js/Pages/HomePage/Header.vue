@@ -57,11 +57,14 @@ const changeLocale = (item) => {
         class="inline-flex items-center gap-2.5 text-xl font-bold text-white md:text-3xl"
         aria-label="logo"
       >
-        <img
-          src="https://github.com/sa-sa-creator/Images/blob/main/RanyLogo.png?raw=true"
-          class="w-14"
-          alt=""
-        />
+        <div class="flex items-center justify-center w-12 h-12 bg-yellow-500 rounded-lg shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-8 h-8 text-white">
+            <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
+            <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
+            <circle cx="40" cy="50" r="3" fill="white"/>
+            <circle cx="60" cy="50" r="3" fill="white"/>
+          </svg>
+        </div>
         {{ $t('Rany Shop') }}
       </a>
 

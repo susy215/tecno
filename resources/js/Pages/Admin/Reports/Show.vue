@@ -114,7 +114,7 @@ const formaTableDataCellate = (date) => {
           <div>
             <div>
               <img
-                src="https://github.com/sa-sa-creator/Images/blob/main/RanyLogo.png?raw=TableRowue"
+                src="/logo-icon.svg"
                 class="w-28 ml-5 -mb-4"
                 alt=""
               />

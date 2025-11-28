@@ -121,7 +121,14 @@ const submit = () => {
             <!-- Sign Up Section -->
             <div
                 class="w-96 rounded-l-3xl rounded-lg bg-gradient-to-r text-center justify-center from-orange-400 to-yellow-400 text-white p-8">
-                <img src="/RanyLogo.png" class="justify-center w-36 ml-24 mt-4" alt="" />
+                <div class="flex items-center justify-center w-36 h-36 ml-24 mt-4 bg-yellow-500 rounded-lg shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24 text-white">
+                        <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
+                        <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
+                        <circle cx="40" cy="50" r="3" fill="white"/>
+                        <circle cx="60" cy="50" r="3" fill="white"/>
+                    </svg>
+                </div>
                 <h2 class="text-2xl font-bold mb-5 text-center">¡Hola, Amigo!</h2>
                 <p class="mb-6 text-center">
                     Ingresa tus datos personales y comienza <br />

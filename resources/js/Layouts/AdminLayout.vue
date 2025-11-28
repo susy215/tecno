@@ -581,10 +581,14 @@ const showingNavigationDropdown = ref(false);
       >
         <div>
           <div class="flex justify-center pb-2">
-            <img
-              src="/RanyLOGOS.png"
-              class="w-24 hover:scale-110 -mt-5 hover:shadow-lg hover:shadow-gray-400"
-            />
+            <div class="flex items-center justify-center w-20 h-20 bg-yellow-500 rounded-lg shadow-lg hover:scale-110 -mt-5 hover:shadow-xl transition-transform">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-14 h-14 text-white">
+                <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
+                <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
+                <circle cx="40" cy="50" r="3" fill="white"/>
+                <circle cx="60" cy="50" r="3" fill="white"/>
+              </svg>
+            </div>
           </div>
           <div
             class="hover:scale-110 font-khmer text-sm -mt-4 cursor-default text-yellow-700"
