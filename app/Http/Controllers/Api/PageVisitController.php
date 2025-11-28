@@ -27,4 +27,10 @@ class PageVisitController extends Controller
         $visit = PageVisit::where('page', $page)->first();
         return response()->json(['count' => $visit ? $visit->count : 0]);
     }
+
+    public function getTotalCount()
+    {
+        $total = PageVisit::sum('count');
+        return response()->json(['total' => $total]);
+    }
 }

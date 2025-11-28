@@ -30,6 +30,9 @@ const getProfileImage = () => {
 
 const profileUrl = getProfileImage();
 
+// Contador de visitas totales
+const totalVisits = ref(0);
+
 const search = ref("");
 watch(
     search,
@@ -43,6 +46,28 @@ const toggleDark = useToggle(isDark);
 
 onMounted(() => {
     initFlowbite();
+    
+    // Obtener contador total de visitas
+    axios.get('/api/total-visits')
+        .then(res => {
+            totalVisits.value = res.data.total || 0;
+        })
+        .catch(error => {
+            console.error('No se pudo obtener el contador de visitas:', error);
+        });
+    
+    // Registrar visita de la página actual
+    axios.post('/api/page-visit', { page: window.location.pathname })
+        .then(() => {
+            // Actualizar contador total después de registrar
+            axios.get('/api/total-visits')
+                .then(res => {
+                    totalVisits.value = res.data.total || 0;
+                });
+        })
+        .catch(error => {
+            console.error('No se pudo registrar la visita:', error);
+        });
 });
 
 const items = reactive({
@@ -104,6 +129,17 @@ const changeLocale = (item) => {
             <!-- Aquí agregas el selector de tema -->
 
             <div v-if="canLogin" class="flex gap-2 lg:flex 2xl:ml-16 items-center">
+                <!-- Contador de visitas -->
+                <div class="hidden md:flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-lg border border-yellow-400/30 backdrop-blur-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-300">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <div class="flex flex-col leading-tight">
+                        <span class="text-[10px] text-yellow-300/80 font-medium">Visitas</span>
+                        <span class="text-sm font-bold text-yellow-300">{{ totalVisits.toLocaleString() }}</span>
+                    </div>
+                </div>
+                
                 <Link :href="route('cart.view')" id="cart" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom"
                     class="relative flex h-12 w-12 rounded-xl flex-col items-center justify-center transition-all duration-300 hover:bg-gray-700/80 hover:scale-110 active:scale-95 dark:text-yellow-400 shadow-lg hover:shadow-xl">
@@ -257,6 +293,17 @@ const changeLocale = (item) => {
                         </span>
                     </div>
                     <div v-else class="flex items-center gap-3">
+                        <!-- Contador de visitas para usuarios no autenticados -->
+                        <div class="hidden md:flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-lg border border-yellow-400/30 backdrop-blur-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-300">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <div class="flex flex-col leading-tight">
+                                <span class="text-[10px] text-yellow-300/80 font-medium">Visitas</span>
+                                <span class="text-sm font-bold text-yellow-300">{{ totalVisits.toLocaleString() }}</span>
+                            </div>
+                        </div>
+                        
                         <Link :href="route('login')" type="button"
                             class="text-yellow-300 hover:text-white border-2 border-yellow-400 hover:bg-gradient-to-r hover:from-yellow-500 hover:to-orange-500 focus:ring-4 focus:outline-none focus:ring-yellow-300/50 font-semibold rounded-xl text-sm px-6 py-2.5 text-center transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:from-yellow-500 dark:hover:to-orange-500 dark:focus:ring-yellow-900">
                         {{ $t('Login') }}</Link>

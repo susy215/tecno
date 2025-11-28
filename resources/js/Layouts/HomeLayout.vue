@@ -13,19 +13,28 @@ onMounted(() => {
 
     // Registrar la visita
     axios.post('/api/page-visit', { page: window.location.pathname })
+        .then(() => {
+            // Obtener el contador total después de registrar
+            axios.get('/api/total-visits')
+                .then(res => {
+                    visitCount.value = res.data.total || 0;
+                })
+                .catch(error => {
+                    console.error('No se pudo obtener el contador total:', error);
+                });
+        })
         .catch(error => {
             console.error('No se pudo registrar la visita:', error);
         });
 
-    // Obtener el contador de visitas
-    axios.get('/api/page-visit', { params: { page: window.location.pathname } })
+    // Obtener el contador total de visitas
+    axios.get('/api/total-visits')
         .then(res => {
-            visitCount.value = res.data.count;
+            visitCount.value = res.data.total || 0;
         })
         .catch(error => {
             console.error('No se pudo obtener el contador de visitas:', error);
         });
-
 });
 
 import Navbar from "@/Layouts/Navbar.vue";
