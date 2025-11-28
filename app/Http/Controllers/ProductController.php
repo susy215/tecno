@@ -191,9 +191,14 @@ if ($request->has('inStock')) {
             $productImages = $request->file('product_images');
             $imagePath = public_path('product_images');
             
-            // Crear el directorio si no existe
+            // Crear el directorio si no existe con permisos más permisivos
             if (!File::isDirectory($imagePath)) {
-                File::makeDirectory($imagePath, 0755, true, true);
+                File::makeDirectory($imagePath, 0777, true, true);
+            }
+            
+            // Asegurar que el directorio tenga permisos de escritura
+            if (!is_writable($imagePath)) {
+                chmod($imagePath, 0777);
             }
             
             // Loop through each uploaded image
