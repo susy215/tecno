@@ -89,7 +89,7 @@ const changeLocale = (item) => {
     <header class="h-24 md:h-28 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-2xl border-b-2 border-yellow-500/30 -z-0">
         <div class="flex flex-wrap items-center justify-between px-3 sm:px-4 mx-auto max-w-screen-2xl md:px-10 h-full gap-2">
             <!-- logo - start -->
-            <a href="/products" class="inline-flex items-center gap-2 sm:gap-3 text-xl text-white md:text-3xl hover:opacity-90 transition-all duration-300 hover:scale-105 flex-shrink-0 cursor-pointer" aria-label="logo" @click.prevent="router.visit(route('products.index'))">
+            <a href="#" class="inline-flex items-center gap-2 sm:gap-3 text-xl text-white md:text-3xl hover:opacity-90 transition-all duration-300 hover:scale-105 flex-shrink-0 cursor-pointer" aria-label="logo" @click.prevent>
                 <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 rounded-lg sm:rounded-xl shadow-2xl ring-2 sm:ring-4 ring-yellow-300/40 hover:ring-yellow-300/60 hover:scale-110 transition-all duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white drop-shadow-lg">
                         <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
