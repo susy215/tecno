@@ -9,17 +9,19 @@
                             <div class="overflow-hidden bg-gray-100 shadow-md rounded-lg"
                                 v-for="(image, index) in product.product_images" :key="index"
                                 @click="setCurrentImage(image)">
-                                <img :src="`/${image.image}`" loading="lazy" alt="Product Image Thumbnail"
-                                    class="object-cover object-center w-full h-full cursor-pointer" />
+                                <img :src="image.src || `/${image.image}`" loading="lazy" alt="Product Image Thumbnail"
+                                    class="object-cover object-center w-full h-full cursor-pointer" 
+                                    @error="$event.target.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'" />
                             </div>
                         </div>
 
                         <div class="relative overflow-hidden shadow-md rounded-lg h-80 lg:col-span-4">
                             <img
-                                :src="currentImage && currentImage.image ? `/${currentImage.image}` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'"
+                                :src="currentImage && (currentImage.src || currentImage.image) ? (currentImage.src || `/${currentImage.image}`) : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'"
                                 loading="lazy"
                                 alt="Main Product Image"
                                 class="object-cover object-center w-full h-full"
+                                @error="$event.target.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'"
                             />
 
                             <span

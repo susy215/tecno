@@ -21,6 +21,7 @@ class ProductImage extends Model
     }
 
     public function getSrcAttribute(){
-        return asset("stores/{$this->image}");
+        // Usar asset() para generar la URL correcta con el ASSET_URL si está configurado
+        return asset($this->image);
     }
 }

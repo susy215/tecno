@@ -97,7 +97,7 @@ const { hasPermission } = usePermission();
                 <img
                   v-if="products.product_images.length > 0"
                   class="w-56 h-56 rounded-xl"
-                  :src="`/${products.product_images[0].image}`"
+                  :src="products.product_images[0].src || `/${products.product_images[0].image}`"
                   alt=""
                 />
                 <img
@@ -113,7 +113,7 @@ const { hasPermission } = usePermission();
                   v-for="(image, index) in products.product_images"
                   :key="index"
                   class="w-24 h-24 rounded-xl m-1"
-                  :src="`/${image.image}`"
+                  :src="image.src || `/${image.image}`"
                   alt=""
                 />
                 <!-- Placeholder image for the case when there are no images -->

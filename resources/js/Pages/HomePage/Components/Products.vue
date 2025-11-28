@@ -36,10 +36,11 @@ const addToCart = (product) => {
             <a href="#" class="block h-64 mb-2 overflow-hidden rounded-lg shadow-lg dark:shadow-gray-700 group relative">
                 <img
                     v-if="product.product_images.length > 0"
-                    :src="`/${product.product_images[0].image}`"
+                    :src="product.product_images[0].src || `/${product.product_images[0].image}`"
                     loading="lazy"
                     alt="Product Image"
                     class="object-cover object-center w-full h-full transition duration-200 group-hover:scale-110"
+                    @error="$event.target.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'"
                 />
                 <img
                     v-else

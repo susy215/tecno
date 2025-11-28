@@ -304,7 +304,7 @@ const productsWithProfit = props.products.map((product) => {
                 <img
                   v-if="product.product_images.length > 0"
                   class="w-10 h-10 rounded"
-                  :src="`/${product.product_images[0].image}`"
+                  :src="product.product_images[0].src || `/${product.product_images[0].image}`"
                   alt="" />
                 <img
                   v-else

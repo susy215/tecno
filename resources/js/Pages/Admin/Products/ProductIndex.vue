@@ -312,8 +312,9 @@ const applyFilterStock = () => {
                 <img
                   v-if="Product.product_images.length > 0"
                   class="w-10 h-10 rounded"
-                  :src="`/${Product.product_images[0].image}`"
+                  :src="Product.product_images[0].src || `/${Product.product_images[0].image}`"
                   alt=""
+                  @error="$event.target.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'"
                 />
                 <img
                   v-else

@@ -187,7 +187,7 @@ const formaTableDataCellate = (date) => {
                 <img
                   v-if="item.product.product_images.length > 0"
                   class="w-10 h-10 rounded"
-                  :src="`/${item.product.product_images[0].image}`"
+                  :src="item.product.product_images[0].src || `/${item.product.product_images[0].image}`"
                   alt=""
                 />
                 <img

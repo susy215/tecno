@@ -139,7 +139,7 @@ const formatDate = (date) => {
             <tbody>
                 <tr v-for="item in order.order_items" :key="item.id" class="odd:bg-white even:bg-gray-50 border-b">
                     <td class="px-6 py-4">
-                        <img v-if="item.product.product_images.length > 0" class="w-10 h-10 rounded" :src="`/${item.product.product_images[0].image}`" alt="" />
+                        <img v-if="item.product.product_images.length > 0" class="w-10 h-10 rounded" :src="item.product.product_images[0].src || `/${item.product.product_images[0].image}`" alt="" @error="$event.target.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'" />
                         <img v-else class="w-10 h-10 rounded" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png" alt="" />
                     </td>
                     <td class="px-6 py-4">{{ item.product.title }}</td>

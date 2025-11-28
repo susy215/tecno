@@ -66,7 +66,7 @@ const totalSellingPrice = computed(() => {
               >
                 <img
                   v-if="product.product_images.length > 0"
-                  :src="`/${product.product_images[0].image}`"
+                  :src="product.product_images[0].src || `/${product.product_images[0].image}`"
                   loading="lazy"
                   alt="No product images!"
                   class="object-cover object-center transition duration-200 group-hover:scale-110 md:h-full md:w-full w-24 h-24"
