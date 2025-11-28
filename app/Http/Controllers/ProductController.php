@@ -14,6 +14,7 @@ use App\Policies\ProductPolicy;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\DiscountResource;
@@ -101,15 +102,22 @@ if ($request->has('inStock')) {
 
         if ($request->hasFile('product_images')) {
             $productImages = $request->file('product_images');
+            $imagePath = public_path('product_images');
+            
+            // Crear el directorio si no existe
+            if (!File::isDirectory($imagePath)) {
+                File::makeDirectory($imagePath, 0755, true, true);
+            }
+            
             foreach ($productImages as $image) {
                 // Generate a unique name for the image using timestamp and random string
-                 $uniqueName = time() . '-' . Str::random(10) . '.' . $image->getClientOriginalExtension();
-                // // Store the image in the public folder with the unique name
-                $image->move('product_images',$uniqueName);
+                $uniqueName = time() . '-' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+                // Store the image in the public folder with the unique name
+                $image->move($imagePath, $uniqueName);
                 // Create a new product image record with the product_id and unique name
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image' => 'product_images/'. $uniqueName,
+                    'image' => 'product_images/' . $uniqueName,
                 ]);
             }
         }
@@ -158,13 +166,20 @@ if ($request->has('inStock')) {
         // Check if product images were uploaded
         if ($request->hasFile('product_images')) {
             $productImages = $request->file('product_images');
+            $imagePath = public_path('product_images');
+            
+            // Crear el directorio si no existe
+            if (!File::isDirectory($imagePath)) {
+                File::makeDirectory($imagePath, 0755, true, true);
+            }
+            
             // Loop through each uploaded image
             foreach ($productImages as $image) {
                 // Generate a unique name for the image using timestamp and random string
                 $uniqueName = time() . '-' . Str::random(10) . '.' . $image->getClientOriginalExtension();
 
                 // Store the image in the public folder with the unique name
-                $image->move('product_images', $uniqueName);
+                $image->move($imagePath, $uniqueName);
 
                 // Create a new product image record with the product_id and unique name
                 ProductImage::create([

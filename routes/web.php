@@ -136,7 +136,7 @@ Route::resource('/suppliers', SupplierController::class);
 
 Route::delete('/products/image/{id}',[ProductController::class,'deleteImage'])->name('products.image.delete');
 Route::delete('/products/destory/{id}',[ProductController::class,'destory'])->name('products.destory');
-Route::put('/products/update/{id}',[ProductController::class,'update'])->name('products.update');
+// Route::put('/products/update/{id}',[ProductController::class,'update'])->name('products.update'); // Duplicado - Route::resource ya crea esta ruta dentro de /admin
 
 
 //routes for products list and filter
