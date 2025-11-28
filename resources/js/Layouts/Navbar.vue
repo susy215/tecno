@@ -12,7 +12,7 @@ const cart = computed(() => usePage().props.cart);
 
 import { router } from "@inertiajs/vue3";
 import { loadLanguageAsync } from "laravel-vue-i18n";
-
+import axios from 'axios';
 import { initFlowbite } from "flowbite";
 import { useDark, useToggle } from "@vueuse/core";
 import { debounce } from "lodash";
