@@ -43,6 +43,7 @@ const CtotalCost = () => {
 // const product_images = ref([])
 const productImages = ref([]);
 const dialogImageUrl = ref("");
+const dialogVisible = ref(false);
 
 const handleFileChange = (file) => {
   productImages.value.push(file);
@@ -57,48 +58,46 @@ const handlePictureCardPreview = (file) => {
   dialogVisible.value = true;
 };
 const Addimage = async () => {
+  // Validar campos requeridos
   if (
-    title.value == "" ||
-    price.value == "" ||
-    cost.value == "" ||
-    category_id.value == ""
+    !form.title ||
+    !form.price ||
+    !form.cost ||
+    !form.category_id
   ) {
     alert("Please Input Value");
-  } else {
-    const formData = new FormData();
-    formData.append("title", title.value);
-    formData.append("price", price.value);
-    formData.append("cost", cost.value);
-    formData.append("qty", qty.value);
-    formData.append("description", description.value);
-    formData.append("category_id", category_id.value);
-    formData.append("supplier_id", supplier_id.value);
-    formData.append("discount", discount.value);
-    formData.append("sellingprice", sellingprice.value);
-    formData.append("total_cost", total_cost.value);
-    formData.append("total_price", total_price.value);
-    // Append each image to the form data
-    for (const image of productImages.value) {
-      formData.append("product_images[]", image.raw);
-    }
+    return;
+  }
 
-    try {
-      await router.post("store", formData, {
-        onSuccess: (page) => {
-          Swal.fire({
-            toast: true,
-            icon: "success",
-            position: "top-end",
-            showConfirmButton: false,
-            title: page.props.flash.success,
-          });
-          dialogVisible.value = false;
-          resetFormData();
-        },
-      });
-    } catch (err) {
-      console.log(err);
+  // Append product images to the form
+  if (productImages.value.length > 0) {
+    form.product_images = [];
+    for (const image of productImages.value) {
+      if (image.raw) {
+        form.product_images.push(image.raw);
+      }
     }
+  }
+
+  try {
+    form.post(route('products.store'), {
+      onSuccess: (page) => {
+        Swal.fire({
+          toast: true,
+          icon: "success",
+          position: "top-end",
+          showConfirmButton: false,
+          title: page.props.flash.success,
+        });
+        if (dialogVisible.value !== undefined) {
+          dialogVisible.value = false;
+        }
+        form.reset();
+        productImages.value = [];
+      },
+    });
+  } catch (err) {
+    console.log(err);
   }
 };
 </script>
