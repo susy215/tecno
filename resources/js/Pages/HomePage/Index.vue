@@ -48,7 +48,7 @@ const addToCart = (product) => {
 <template>
   <div>
     <HomeLayout>
-      <div class="mt-28 md:mt-20">
+      <div class="mt-24 md:mt-20">
         <FilterCategory></FilterCategory>
       </div>
       <!-- Banner -->
