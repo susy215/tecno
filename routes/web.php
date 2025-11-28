@@ -75,7 +75,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/clear/notification', [AdminController::class,'clear'])->name('clear.infor');
     //Product
     Route::resource('/products', ProductController::class);
-    Route::post('/products/store',[ProductController::class,'store'])->name('products.store');
+    // Route::post('/products/store',[ProductController::class,'store'])->name('products.store'); // Duplicado - Route::resource ya crea esta ruta
     Route::put('/products/update-to-public/{id}',[ProductController::class,'updateToPublished'])->name('products.updateToPublished');
     Route::put('/products/update-to-unpublic/{id}',[ProductController::class,'updateToUnpublished'])->name('products.updateToUnpublished');
     Route::get('/sale-report', [ReportController::class, 'SaleReport'])->name('SaleReport.SaleReport');
@@ -98,7 +98,7 @@ Route::middleware(['auth', 'role:staff|admin'])->prefix('/admin')->group(functio
     Route::get('/clear/notification', [AdminController::class,'clear'])->name('clear.infor');
     //Product
     Route::resource('/products', ProductController::class);
-    Route::post('/products/store',[ProductController::class,'store'])->name('products.store');
+    // Route::post('/products/store',[ProductController::class,'store'])->name('products.store'); // Duplicado - Route::resource ya crea esta ruta
     Route::put('/products/update-to-public/{id}',[ProductController::class,'updateToPublished'])->name('products.updateToPublished');
     Route::put('/products/update-to-unpublic/{id}',[ProductController::class,'updateToUnpublished'])->name('products.updateToUnpublished');
     Route::get('/customer-report', [ReportController::class, 'CustomerReport'])->name('CustomerReport.CustomerReport');
