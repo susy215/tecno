@@ -46,12 +46,12 @@ const deleteProduct = () => {
 
 const updateToPublic = (id) => {
   ProductID.value = id;
-  router.put("/admin/products/update-to-public/" + ProductID.value, {});
+  router.put(route('products.updateToPublished', ProductID.value), {});
 };
 
 const updateToUnpublished = (id) => {
   ProductID.value = id;
-  router.put("/admin/products/update-to-unpublic/" + ProductID.value, {});
+  router.put(route('products.updateToUnpublished', ProductID.value), {});
 };
 
 const search = ref("");
