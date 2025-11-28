@@ -20,7 +20,14 @@
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                     <div class="flex lg:justify-center lg:col-start-2">
-                        <img src="{{ asset('RanyLogo.svg') }}" alt="Rany Shop Logo" class="h-24 w-auto">
+                        <div class="flex items-center justify-center w-24 h-24 bg-yellow-500 rounded-lg shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-16 h-16 text-white">
+                                <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
+                                <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
+                                <circle cx="40" cy="50" r="3" fill="white"/>
+                                <circle cx="60" cy="50" r="3" fill="white"/>
+                            </svg>
+                        </div>
                     </div>
                     @if (Route::has('login'))
                         <nav class="-mx-3 flex flex-1 justify-end">
