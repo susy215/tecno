@@ -89,18 +89,18 @@ const changeLocale = (item) => {
     <header class="h-20 md:h-24 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-xl border-b border-yellow-500/20 -z-0">
         <div class="flex flex-wrap items-center justify-between px-3 sm:px-4 mx-auto max-w-screen-2xl md:px-10 h-full gap-1.5 sm:gap-2">
             <!-- logo - start -->
-            <a href="#" class="inline-flex items-center gap-2 sm:gap-3 text-xl text-white md:text-3xl hover:opacity-90 transition-all duration-300 hover:scale-105 flex-shrink-0 cursor-pointer" aria-label="logo" @click.prevent>
-                <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 rounded-lg sm:rounded-xl shadow-2xl ring-2 sm:ring-4 ring-yellow-300/40 hover:ring-yellow-300/60 hover:scale-110 transition-all duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white drop-shadow-lg">
+            <a href="#" class="inline-flex items-center gap-1.5 sm:gap-2 md:gap-3 text-xl text-white hover:opacity-90 transition-all duration-300 flex-shrink-0 cursor-pointer" aria-label="logo" @click.prevent>
+                <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 rounded-lg shadow-lg ring-2 ring-yellow-300/40 hover:ring-yellow-300/60 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 text-white">
                         <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
                         <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
                         <circle cx="40" cy="50" r="3.5" fill="white"/>
                         <circle cx="60" cy="50" r="3.5" fill="white"/>
                     </svg>
                 </div>
-                <div class="flex flex-col">
-                    <span class="hidden xs:block font-khmer font-bold text-white text-sm sm:text-base md:text-lg lg:text-2xl drop-shadow-md">{{ $t("Rany Shop") }}</span>
-                    <span class="hidden xs:block text-[9px] sm:text-xs text-yellow-300 font-semibold tracking-wider sm:tracking-widest">shopgrupo25</span>
+                <div class="hidden sm:flex flex-col">
+                    <span class="font-khmer font-bold text-white text-sm md:text-base lg:text-xl">{{ $t("Rany Shop") }}</span>
+                    <span class="text-[9px] md:text-xs text-yellow-300 font-semibold tracking-wide">shopgrupo25</span>
                 </div>
             </a>
 
@@ -128,9 +128,9 @@ const changeLocale = (item) => {
 
             <!-- Aquí agregas el selector de tema -->
 
-            <div v-if="canLogin" class="flex gap-1.5 sm:gap-2 md:gap-2.5 lg:flex items-center flex-shrink-0">
-                <!-- Contador de visitas - Desktop -->
-                <div class="hidden md:flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-500/15 to-orange-500/15 rounded-lg border border-yellow-400/25 backdrop-blur-sm">
+            <div v-if="canLogin" class="flex gap-1 sm:gap-1.5 md:gap-2 items-center flex-shrink-0">
+                <!-- Contador de visitas - Solo Desktop -->
+                <div class="hidden lg:flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-500/15 to-orange-500/15 rounded-lg border border-yellow-400/25 backdrop-blur-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-yellow-300">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
@@ -140,36 +140,28 @@ const changeLocale = (item) => {
                     </div>
                 </div>
                 
-                <!-- Contador de visitas - Mobile compacto -->
-                <div class="md:hidden flex items-center gap-1 px-1.5 py-1 bg-gradient-to-r from-yellow-500/15 to-orange-500/15 rounded-md border border-yellow-400/25 backdrop-blur-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 text-yellow-300">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                    <span class="text-[10px] font-bold text-yellow-300">{{ totalVisits > 999 ? (totalVisits/1000).toFixed(1) + 'K' : totalVisits }}</span>
-                </div>
-                
                 <Link :href="route('cart.view')" id="cart" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom"
-                    class="relative flex h-10 w-10 md:h-11 md:w-11 rounded-lg flex-col items-center justify-center transition-all duration-300 hover:bg-gray-700/70 hover:scale-105 active:scale-95 dark:text-yellow-400 shadow-md hover:shadow-lg">
+                    class="relative flex h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 rounded-lg flex-col items-center justify-center transition-all duration-300 hover:bg-gray-700/70 hover:scale-105 active:scale-95 dark:text-yellow-400 shadow-md hover:shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6 text-white dark:text-yellow-400">
+                    stroke="currentColor" class="w-4.5 h-4.5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white dark:text-yellow-400">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
 
                 <span v-if="cart.count != 0"
-                    class="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-5 px-1.5 text-[10px] font-bold text-white bg-gradient-to-r from-red-500 to-red-600 border border-white rounded-full shadow-lg animate-pulse">
+                    class="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 flex items-center justify-center min-w-[16px] sm:min-w-[18px] h-4 sm:h-5 px-1 sm:px-1.5 text-[9px] sm:text-[10px] font-bold text-white bg-gradient-to-r from-red-500 to-red-600 border border-white rounded-full shadow-lg animate-pulse">
                     {{ cart.count }}
                 </span>
                 </Link>
                 <button @click="toggleDark()" type="button"
-                    class="flex items-center justify-center h-10 w-10 md:h-11 md:w-11 text-white dark:text-yellow-400 dark:hover:bg-gray-700/70 hover:bg-gray-700/70 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 md:w-6 md:h-6"
+                    class="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 text-white dark:text-yellow-400 dark:hover:bg-gray-700/70 hover:bg-gray-700/70 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4.5 h-4.5 sm:w-5 sm:h-5 md:w-6 md:h-6"
                         v-if="isDark == false">
                         <path
                             d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z" />
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 md:w-6 md:h-6"
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4.5 h-4.5 sm:w-5 sm:h-5 md:w-6 md:h-6"
                         v-if="isDark == true">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
@@ -178,8 +170,8 @@ const changeLocale = (item) => {
                 <div class="cursor-pointer group flex text-sm hover:bg-gray-700/70 rounded-lg focus:ring-2 transition-all duration-300 shadow-md hover:shadow-lg"
                     aria-expanded="false" data-dropdown-toggle="dropdown">
                     <button type="button" data-dropdown-toggle="language-dropdown-menu"
-                        class="flex items-center justify-center h-10 w-10 md:h-11 md:w-11 text-white dark:text-yellow-400 hover:bg-gray-700/70 rounded-lg transition-all duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 md:w-6 md:h-6">
+                        class="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 text-white dark:text-yellow-400 hover:bg-gray-700/70 rounded-lg transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4.5 h-4.5 sm:w-5 sm:h-5 md:w-6 md:h-6">
                             <path fill-rule="evenodd"
                                 d="M9 2.25a.75.75 0 0 1 .75.75v1.506a49.384 49.384 0 0 1 5.343.371.75.75 0 1 1-.186 1.489c-.66-.083-1.323-.151-1.99-.206a18.67 18.67 0 0 1-2.97 6.323c.318.384.65.753 1 1.107a.75.75 0 0 1-1.07 1.052A18.902 18.902 0 0 1 9 13.687a18.823 18.823 0 0 1-5.656 4.482.75.75 0 0 1-.688-1.333 17.323 17.323 0 0 0 5.396-4.353A18.72 18.72 0 0 1 5.89 8.598a.75.75 0 0 1 1.388-.568A17.21 17.21 0 0 0 9 11.224a17.168 17.168 0 0 0 2.391-5.165 48.04 48.04 0 0 0-8.298.307.75.75 0 0 1-.186-1.489 49.159 49.159 0 0 1 5.343-.371V3A.75.75 0 0 1 9 2.25ZM15.75 9a.75.75 0 0 1 .68.433l5.25 11.25a.75.75 0 1 1-1.36.634l-1.198-2.567h-6.744l-1.198 2.567a.75.75 0 0 1-1.36-.634l5.25-11.25A.75.75 0 0 1 15.75 9Zm-2.672 8.25h5.344l-2.672-5.726-2.672 5.726Z"
                                 clip-rule="evenodd" />
@@ -269,15 +261,15 @@ const changeLocale = (item) => {
                     data-dropdown-placement="bottom"></button>
 
                 <div>
-                    <div v-if="auth.user" class="flex items-center gap-1.5 md:gap-2">
+                    <div v-if="auth.user" class="flex items-center gap-1 sm:gap-1.5 md:gap-2">
                         <button id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                             data-dropdown-placement="bottom"
                             class="flex rounded-full flex-col items-center justify-center transition-all duration-300 hover:ring-2 hover:ring-yellow-400/50 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">
-                            <img class="w-10 h-10 md:w-12 md:h-12 object-cover rounded-full border-2 border-white shadow-lg ring-2 ring-yellow-400/40"
+                            <img class="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 object-cover rounded-full border-2 border-white shadow-lg ring-2 ring-yellow-400/40"
                                 :src="profileUrl" alt="Profile Image"
                                 @error="$event.target.src='https://api.dicebear.com/7.x/avataaars/svg?seed=' + (auth.user?.name || 'default') + '&backgroundColor=b6e3f4'" />
                         </button>
-                        <span class="flex items-center">
+                        <span class="hidden md:flex items-center">
                             <Link v-if="hasRole('admin')" :href="route('admin.index')"
                                 :active="route().current('admin.index')" class="text-white">
                             <div class="flex items-center justify-center h-10 w-10 md:h-11 md:w-11 hover:bg-gray-700/70 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105">
@@ -300,9 +292,9 @@ const changeLocale = (item) => {
                             </NavLink>
                         </span>
                     </div>
-                    <div v-else class="flex items-center gap-1.5 sm:gap-2">
-                        <!-- Contador de visitas para usuarios no autenticados - Desktop -->
-                        <div class="hidden md:flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-500/15 to-orange-500/15 rounded-lg border border-yellow-400/25 backdrop-blur-sm">
+                    <div v-else class="flex items-center gap-1 sm:gap-1.5">
+                        <!-- Contador de visitas - Solo Desktop grande -->
+                        <div class="hidden lg:flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-500/15 to-orange-500/15 rounded-lg border border-yellow-400/25 backdrop-blur-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-yellow-300">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                             </svg>
@@ -312,19 +304,11 @@ const changeLocale = (item) => {
                             </div>
                         </div>
                         
-                        <!-- Contador de visitas para usuarios no autenticados - Mobile -->
-                        <div class="md:hidden flex items-center gap-1 px-1.5 py-1 bg-gradient-to-r from-yellow-500/15 to-orange-500/15 rounded-md border border-yellow-400/25 backdrop-blur-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 text-yellow-300">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
-                            <span class="text-[10px] font-bold text-yellow-300">{{ totalVisits > 999 ? (totalVisits/1000).toFixed(1) + 'K' : totalVisits }}</span>
-                        </div>
-                        
                         <Link :href="route('login')" type="button"
-                            class="text-yellow-300 hover:text-white border border-yellow-400 sm:border-2 hover:bg-gradient-to-r hover:from-yellow-500 hover:to-orange-500 focus:ring-4 focus:outline-none focus:ring-yellow-300/50 font-semibold rounded-lg sm:rounded-xl text-xs sm:text-sm px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 text-center transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:from-yellow-500 dark:hover:to-orange-500 dark:focus:ring-yellow-900">
+                            class="text-yellow-300 hover:text-white border border-yellow-400 hover:bg-gradient-to-r hover:from-yellow-500 hover:to-orange-500 focus:ring-2 focus:outline-none focus:ring-yellow-300/50 font-semibold rounded-lg text-xs sm:text-sm px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 text-center transition-all duration-300 shadow-md hover:shadow-lg">
                         {{ $t('Login') }}</Link>
                         <Link :href="route('register')" v-if="canRegister" type="button"
-                            class="text-white bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 focus:ring-4 focus:outline-none focus:ring-yellow-300/50 font-semibold rounded-lg sm:rounded-xl text-xs sm:text-sm px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 text-center transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 dark:from-yellow-500 dark:to-orange-500 dark:hover:from-yellow-600 dark:hover:to-orange-600 dark:focus:ring-yellow-900">
+                            class="text-white bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 focus:ring-2 focus:outline-none focus:ring-yellow-300/50 font-semibold rounded-lg text-xs sm:text-sm px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 text-center transition-all duration-300 shadow-md hover:shadow-lg">
                         {{ $t('Register') }}</Link>
                     </div>
                 </div>
