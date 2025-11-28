@@ -33,12 +33,13 @@ use App\Http\Controllers\UserProfileControllter;
 
 
 
-Route::resource('/roles', RoleController::class);
-Route::resource('/permissions', PermissionController::class);
+// Rutas de roles y permissions movidas dentro del grupo /admin para evitar duplicados
+// Route::resource('/roles', RoleController::class);
+// Route::resource('/permissions', PermissionController::class);
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+// Route::get('/home', [HomeController::class, 'index'])->name('home.index'); // Duplicado - ya existe en la línea anterior
 Route::get('/home/product/details/{id}', [HomeController::class, 'show'])->name('productDetail.show');
 
 
