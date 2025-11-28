@@ -28,6 +28,7 @@ const CtotalCost = () =>{
 }
 const productImages = ref([]);
 const dialogImageUrl = ref("");
+const dialogVisible = ref(false);
 
 const handleFileChange = (file) => {
   productImages.value.push(file);
@@ -54,6 +55,7 @@ const form = useForm({
   sellingprice: props.product?.sellingprice,
   total_cost: props.product?.total_cost,
   total_price: props.product?.total_price,
+  product_images: [],
 });
 
 const deleteImage = async (pimage, index) => {
@@ -67,29 +69,23 @@ const deleteImage = async (pimage, index) => {
 const id = ref(props.product.id);
 //update product method
 const updateProduct = async () => {
-  const formData = new FormData();
-  formData.append("title", title.value);
-  formData.append("price", price.value);
-  formData.append("qty", qty.value);
-  formData.append("cost", cost.value);
-  formData.append("description", description.value);
-  formData.append("category_id", category_id.value);
-  formData.append("supplier_id", supplier_id.value);
-  formData.append("discount", discount.value);
-  formData.append("sellingprice", sellingprice.value);
-  formData.append("total_cost", total_cost.value);
-  formData.append("total_price", total_price.value);
-  formData.append("_method", "PUT");
-  // Append product images to the FormData
-  for (const image of productImages.value) {
-    formData.append("product_images[]", image.raw);
+  // Append product images to the form
+  if (productImages.value.length > 0) {
+    form.product_images = [];
+    for (const image of productImages.value) {
+      if (image.raw) {
+        form.product_images.push(image.raw);
+      }
+    }
   }
 
   try {
-    await router.post("/products/update/" + id.value, formData, {
+    form.put(route('products.update', id.value), {
       onSuccess: (page) => {
-        dialogVisible.value = false;
-        resetFormData();
+        if (dialogVisible.value !== undefined) {
+          dialogVisible.value = false;
+        }
+        productImages.value = [];
         Swal.fire({
           toast: true,
           icon: "success",
