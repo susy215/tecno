@@ -147,20 +147,35 @@ if ($request->has('inStock')) {
     //update
     public function update(Request $request, $id)
     {
-
         $product = Product::findOrFail($id);
 
-        $product->title = $request->title;
-        $product->cost = $request->cost;
-        $product->price = $request->price;
-        $product->qty = $request->qty;
-        $product->description = $request->description;
-        $product->category_id = $request->category_id;
-        $product->supplier_id = $request->supplier_id;
-        $product->discount = $request->discount;
-        $product->sellingprice = $request->sellingprice;
-        $product->total_price = $request->total_price;
-        $product->total_cost = $request->total_cost;
+        // Validar y obtener datos del request
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'cost' => 'nullable|numeric',
+            'price' => 'nullable|numeric',
+            'qty' => 'nullable|integer',
+            'description' => 'nullable|string',
+            'category_id' => 'nullable|exists:categories,id',
+            'supplier_id' => 'nullable|exists:suppliers,id',
+            'discount' => 'nullable|numeric',
+            'sellingprice' => 'nullable|numeric',
+            'total_price' => 'nullable|numeric',
+            'total_cost' => 'nullable|numeric',
+        ]);
+
+        // Actualizar campos del producto
+        $product->title = $request->input('title');
+        $product->cost = $request->input('cost');
+        $product->price = $request->input('price');
+        $product->qty = $request->input('qty');
+        $product->description = $request->input('description');
+        $product->category_id = $request->input('category_id');
+        $product->supplier_id = $request->input('supplier_id');
+        $product->discount = $request->input('discount');
+        $product->sellingprice = $request->input('sellingprice');
+        $product->total_price = $request->input('total_price');
+        $product->total_cost = $request->input('total_cost');
         $product->updated_date = now()->format('Y-m-d');
 
         // Check if product images were uploaded
