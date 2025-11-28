@@ -41,10 +41,18 @@ onMounted(() => {
   setTimeout(() =>(notificationShowDelete.value = false),2000);
 });
 
-// Determine profile URL
-const profileUrl = auth.user?.profile?.profile
-  ? `/storage/${auth.user.profile.profile}`
-  : "";
+// Determine profile URL with random avatar fallback
+const getProfileImage = () => {
+  if (auth.user?.profile?.profile) {
+    return `/storage/${auth.user.profile.profile}`;
+  }
+  // Generate random avatar based on user name or email
+  const seed = auth.user?.name || auth.user?.email || 'default';
+  const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(seed)}&backgroundColor=b6e3f4,c0aede,ffd5dc,ffdfbf`;
+  return avatarUrl;
+};
+
+const profileUrl = getProfileImage();
 
 // Reactive items for language selection
 const items = reactive({
@@ -492,16 +500,10 @@ const showingNavigationDropdown = ref(false);
           >
             <span class="sr-only">Open user menu</span>
             <img
-              v-if="!auth.user.profile || auth.user.profile === ''"
-              class="w-8 h-8 rounded-full shadow-md border-2 border-white"
-              src="/profile.png"
-              alt="Profile Image"
-            />
-            <img
-              v-else
-              class="w-8 h-8 object-cover rounded-full shadow-md border-2 border-white"
+              class="w-8 h-8 object-cover rounded-full shadow-md border-2 border-white ring-2 ring-yellow-400"
               :src="profileUrl"
               alt="Profile Image"
+              @error="$event.target.src='https://api.dicebear.com/7.x/avataaars/svg?seed=' + (auth.user?.name || 'default') + '&backgroundColor=b6e3f4'"
             />
           </button>
           <!-- Dropdown menu -->
@@ -577,12 +579,12 @@ const showingNavigationDropdown = ref(false);
       id="drawer-navigation"
     >
       <div
-        class="flex items-center justify-center text-green-950 dark:text-white rounded-lg p-2"
+        class="flex items-center justify-center bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-gray-800 dark:to-gray-900 rounded-lg p-4 mb-4 mx-2 shadow-md border border-yellow-200 dark:border-gray-700"
       >
-        <div>
-          <div class="flex justify-center pb-2">
-            <div class="flex items-center justify-center w-20 h-20 bg-yellow-500 rounded-lg shadow-lg hover:scale-110 -mt-5 hover:shadow-xl transition-transform">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-14 h-14 text-white">
+        <div class="text-center w-full">
+          <div class="flex justify-center pb-3">
+            <div class="flex items-center justify-center w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 ring-4 ring-yellow-200 dark:ring-yellow-800">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-16 h-16 text-white drop-shadow-lg">
                 <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
                 <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
                 <circle cx="40" cy="50" r="3" fill="white"/>
@@ -590,10 +592,13 @@ const showingNavigationDropdown = ref(false);
               </svg>
             </div>
           </div>
-          <div
-            class="hover:scale-110 font-khmer text-sm -mt-4 cursor-default text-yellow-700"
-          >
-            {{ $t("systemName") }}
+          <div class="space-y-1">
+            <h2 class="text-lg font-bold bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent dark:from-yellow-400 dark:to-orange-400">
+              {{ $t("systemName") || "Online Shopping" }}
+            </h2>
+            <p class="text-xs text-gray-600 dark:text-gray-400 font-medium tracking-wide uppercase">
+              Management System
+            </p>
           </div>
         </div>
       </div>
