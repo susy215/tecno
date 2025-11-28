@@ -17,9 +17,18 @@ import { initFlowbite } from "flowbite";
 import { useDark, useToggle } from "@vueuse/core";
 import { debounce } from "lodash";
 
-const profileUrl = auth.user?.profile?.profile
-    ? `/storage/${auth.user.profile.profile}`
-    : "";
+// Determine profile URL with random avatar fallback
+const getProfileImage = () => {
+  if (auth.user?.profile?.profile) {
+    return `/storage/${auth.user.profile.profile}`;
+  }
+  // Generate random avatar based on user name or email
+  const seed = auth.user?.name || auth.user?.email || 'default';
+  const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(seed)}&backgroundColor=b6e3f4,c0aede,ffd5dc,ffdfbf`;
+  return avatarUrl;
+};
+
+const profileUrl = getProfileImage();
 
 const search = ref("");
 watch(
@@ -52,34 +61,39 @@ const changeLocale = (item) => {
 </script>
 
 <template>
-    <header class="h-16 bg-gray-800 -z-0">
+    <header class="h-16 bg-gradient-to-r from-gray-800 via-gray-850 to-gray-800 shadow-lg border-b border-gray-700 -z-0">
         <div class="flex flex-wrap pt-2 items-center justify-between px-4 mx-auto max-w-screen-2xl md:px-10">
             <!-- logo - start -->
-            <a href="/" class="inline-flex items-center gap-2.5 text-xl text-white md:text-3xl mt-2" aria-label="logo">
-                <div class="flex items-center justify-center w-12 h-12 bg-yellow-500 rounded-lg shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-8 h-8 text-white">
+            <a href="/" class="inline-flex items-center gap-2.5 text-xl text-white md:text-3xl mt-2 hover:opacity-90 transition-opacity" aria-label="logo">
+                <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg shadow-xl ring-2 ring-yellow-300/50 hover:scale-105 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-8 h-8 text-white drop-shadow-md">
                         <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
                         <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
                         <circle cx="40" cy="50" r="3" fill="white"/>
                         <circle cx="60" cy="50" r="3" fill="white"/>
                     </svg>
                 </div>
-                <span class="hidden sm:block md:block font-khmer -mt-2 font-bold">{{ $t("Rany Shop") }}</span>
+                <div class="flex flex-col -mt-2">
+                    <span class="hidden sm:block md:block font-khmer font-bold text-white drop-shadow-sm">{{ $t("Rany Shop") }}</span>
+                    <span class="hidden sm:block md:block text-[10px] text-yellow-300/70 font-medium tracking-wider">shopgrupo25</span>
+                </div>
             </a>
 
-            <div class="w-80 ml-4 absolute mt-32 md:mt-0 md:relative  md:w-4/12 ">
+            <div class="w-80 ml-4 absolute mt-32 md:mt-0 md:relative md:w-4/12">
                 <form class="max-w-md mx-auto">
                     <div class="relative">
                         <input type="search" v-model="search" id="default-search"
-                            class="w-full h-10 p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ablock bg-gray-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                            class="w-full h-10 pl-10 pr-4 text-sm text-gray-900 border-2 border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 transition-all"
                             :placeholder="$t('Filter Product')" required />
-
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
                         <button type="submit"
-                            class="absolute px-4 py-2 text-sm font-medium text-white rounded-lg end-1 bottom-1 hover:bg-gray-200 focus:ring-4 focus:outline-none dark:border-yellow-400 focus:ring-yellow-300  dark:focus:ring-yellow-500">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            class="absolute px-3 py-1.5 text-sm font-medium text-white bg-yellow-500 rounded-lg end-1.5 bottom-1.5 hover:bg-yellow-600 focus:ring-2 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-800 transition-colors shadow-sm">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </button>
                     </div>
@@ -92,18 +106,17 @@ const changeLocale = (item) => {
             <div v-if="canLogin" class="flex gap-0 lg:flex 2xl:ml-16 -mt-3">
                 <Link :href="route('cart.view')" id="cart" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom"
-                    class="flex h-10 w-10 pb-3 rounded-lg mt-3 flex-col items-center justify-center gap-1.5 transition duration-100 hover:bg-gray-500 active:bg-gray-200 dark:text-yellow-400 sm:h-10 sm:w-10 md:h-10 md:w-10">
+                    class="relative flex h-10 w-10 pb-3 rounded-lg mt-3 flex-col items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-700 hover:scale-110 active:scale-95 dark:text-yellow-400 sm:h-10 sm:w-10 md:h-10 md:w-10">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6 text-white dark:text-yellow-400">
+                    stroke="currentColor" class="size-6 text-white dark:text-yellow-400 drop-shadow-sm">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
 
                 <span v-if="cart.count != 0"
-                    class="-mt-10 ml-6 items-center justify-center w-auto px-1 text-xs font-bold text-white bg-red-500 border-2 border-red-500 rounded-full lg:top-6 lg:end-40 dark:border-gray-900 2xl:end-auto">
+                    class="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-bold text-white bg-gradient-to-r from-red-500 to-red-600 border-2 border-white rounded-full shadow-lg animate-pulse">
                     {{ cart.count }}
                 </span>
-                <span v-else class="-mt-5 ml-6"> </span>
                 </Link>
                 <button @click="toggleDark()" type="button"
                     class="text-sm text-white p-2 dark:text-yellow-400 dark:hover:bg-gray-700 hover:bg-gray-500 h-10 w-10 mt-3 rounded-lg">
@@ -215,12 +228,10 @@ const changeLocale = (item) => {
                     <div v-if="auth.user" class="flex">
                         <button id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                             data-dropdown-placement="bottom"
-                            class="flex rounded-full mt-3 flex-col items-center justify-center gap-1.5 transition duration-100 hover:bg-gray-500 active:bg-gray-200 sm:h-10 sm:w-10 md:h-10 md:w-10">
-                            <img v-if="!auth.user.profile || auth.user.profile === ''"
-                                class="w-8 h-8 rounded-full border-2 border-white" src="/profile.png"
-                                alt="Profile Image" />
-                            <img v-else class="w-8 h-8 object-cover rounded-full border-2 border-white"
-                                :src="profileUrl" alt="Profile Image" />
+                            class="flex rounded-full mt-3 flex-col items-center justify-center gap-1.5 transition-all duration-200 hover:ring-2 hover:ring-yellow-400 hover:scale-110 active:scale-95 sm:h-10 sm:w-10 md:h-10 md:w-10">
+                            <img class="w-10 h-10 object-cover rounded-full border-2 border-white shadow-lg ring-2 ring-yellow-400/50"
+                                :src="profileUrl" alt="Profile Image"
+                                @error="$event.target.src='https://api.dicebear.com/7.x/avataaars/svg?seed=' + (auth.user?.name || 'default') + '&backgroundColor=b6e3f4'" />
                         </button>
                         <span class="pt-5">
                             <Link v-if="hasRole('admin')" :href="route('admin.index')"

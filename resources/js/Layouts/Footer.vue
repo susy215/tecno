@@ -11,10 +11,10 @@
                     <div class="mb-4">
                         <a
                             href="/"
-                            class="inline-flex items-center gap-2 text-xl font-bold text-white md:text-2xl"
+                            class="inline-flex items-center gap-2 text-xl font-bold text-white md:text-2xl hover:opacity-90 transition-opacity"
                             aria-label="logo"
                         >
-                            <div class="flex items-center justify-center w-10 h-10 bg-yellow-500 rounded-lg">
+                            <div class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg shadow-lg ring-2 ring-yellow-300/30">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-6 h-6 text-white">
                                     <rect x="20" y="30" width="60" height="50" rx="4" fill="currentColor"/>
                                     <path d="M 30 30 L 30 25 Q 30 20 35 20 L 65 20 Q 70 20 70 25 L 70 30" stroke="currentColor" stroke-width="3" fill="none"/>
@@ -22,7 +22,10 @@
                                     <circle cx="60" cy="50" r="3" fill="white"/>
                                 </svg>
                             </div>
-                            <span class="font-khmer">{{ $t("Rany Shop") }}</span>
+                            <div class="flex flex-col">
+                                <span class="font-khmer">{{ $t("Rany Shop") }}</span>
+                                <span class="text-xs text-yellow-300/70 font-medium tracking-wider">shopgrupo25</span>
+                            </div>
                         </a>
                     </div>
                     <!-- logo - end -->
