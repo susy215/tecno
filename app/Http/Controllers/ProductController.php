@@ -149,33 +149,41 @@ if ($request->has('inStock')) {
     {
         $product = Product::findOrFail($id);
 
-        // Validar y obtener datos del request
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'cost' => 'nullable|numeric',
-            'price' => 'nullable|numeric',
-            'qty' => 'nullable|integer',
-            'description' => 'nullable|string',
-            'category_id' => 'nullable|exists:categories,id',
-            'supplier_id' => 'nullable|exists:suppliers,id',
-            'discount' => 'nullable|numeric',
-            'sellingprice' => 'nullable|numeric',
-            'total_price' => 'nullable|numeric',
-            'total_cost' => 'nullable|numeric',
-        ]);
-
-        // Actualizar campos del producto
-        $product->title = $request->input('title');
-        $product->cost = $request->input('cost');
-        $product->price = $request->input('price');
-        $product->qty = $request->input('qty');
-        $product->description = $request->input('description');
-        $product->category_id = $request->input('category_id');
-        $product->supplier_id = $request->input('supplier_id');
-        $product->discount = $request->input('discount');
-        $product->sellingprice = $request->input('sellingprice');
-        $product->total_price = $request->input('total_price');
-        $product->total_cost = $request->input('total_cost');
+        // Actualizar campos del producto usando input() con valores por defecto
+        // Esto evita null values si algún campo no se envía
+        if ($request->has('title')) {
+            $product->title = $request->input('title');
+        }
+        if ($request->has('cost')) {
+            $product->cost = $request->input('cost');
+        }
+        if ($request->has('price')) {
+            $product->price = $request->input('price');
+        }
+        if ($request->has('qty')) {
+            $product->qty = $request->input('qty');
+        }
+        if ($request->has('description')) {
+            $product->description = $request->input('description');
+        }
+        if ($request->has('category_id')) {
+            $product->category_id = $request->input('category_id');
+        }
+        if ($request->has('supplier_id')) {
+            $product->supplier_id = $request->input('supplier_id');
+        }
+        if ($request->has('discount')) {
+            $product->discount = $request->input('discount');
+        }
+        if ($request->has('sellingprice')) {
+            $product->sellingprice = $request->input('sellingprice');
+        }
+        if ($request->has('total_price')) {
+            $product->total_price = $request->input('total_price');
+        }
+        if ($request->has('total_cost')) {
+            $product->total_cost = $request->input('total_cost');
+        }
         $product->updated_date = now()->format('Y-m-d');
 
         // Check if product images were uploaded
