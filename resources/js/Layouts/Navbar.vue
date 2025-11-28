@@ -57,7 +57,7 @@ const changeLocale = (item) => {
             <!-- logo - start -->
             <a href="/" class="inline-flex  items-center gap-2.5 text-xl text-white md:text-3xl mt-2" aria-label="logo">
                 <div class="-mt-4 relative">
-                    <img src="/RanyLogo.png" class="w-14" alt="Rany Logo" />
+                    <img src="/RanyLogo.svg" class="w-24" alt="Rany Logo" />
                 </div>
 
                 <span class="hidden sm:block md:block font-khmer -mt-2">{{ $t("Rany Shop") }}</span>

@@ -15,8 +15,8 @@
                             aria-label="logo"
                         >
                             <img
-                                src="/RanyLogo.png"
-                                class="w-12"
+                                src="/RanyLogo.svg"
+                                class="w-20"
                                 alt=""
                             />
                             <span class="font-khmer ">{{ $t("Rany Shop") }}</span>

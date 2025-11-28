@@ -140,15 +140,14 @@ const addToCart = (product) => {
           </button>
         </div>
       </div>
-      <div class="mt-10 text-center">
-        <h2 class="text-lg md:text-3xl font-khmer text-yellow-500">
+      <div class="mt-16 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold font-khmer text-gray-800 dark:text-yellow-400 mb-4 tracking-tight">
           {{ $t("Welcome to Rany Shop!") }}
         </h2>
 
-        <p class="mx-4 md:mx-72 pt-2 text-sm md:text-lg dark:text-white">
+        <p class="mx-auto max-w-2xl px-4 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
           {{ $t("DescriptionSHOP") }}
         </p>
-
       </div>
 
       <!-- product-grid - start -->
