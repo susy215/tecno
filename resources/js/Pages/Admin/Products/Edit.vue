@@ -56,6 +56,7 @@ const form = useForm({
   total_cost: props.product?.total_cost,
   total_price: props.product?.total_price,
   product_images: [],
+  _method: 'PUT', // Necesario para enviar archivos con PUT
 });
 
 const deleteImage = async (pimage, index) => {
@@ -80,7 +81,8 @@ const updateProduct = async () => {
   }
 
   try {
-    form.put(route('products.update', id.value), {
+    // Usar POST con _method: 'PUT' para soportar archivos
+    form.post(route('products.update', id.value), {
       onSuccess: (page) => {
         if (dialogVisible.value !== undefined) {
           dialogVisible.value = false;
@@ -93,7 +95,11 @@ const updateProduct = async () => {
           showConfirmButton: false,
           title: page.props.flash.success,
         });
+        // Recargar la página para mostrar las nuevas imágenes
+        router.reload({ only: ['product'] });
       },
+      preserveScroll: true,
+      preserveState: false,
     });
   } catch (err) {
     console.log(err);
